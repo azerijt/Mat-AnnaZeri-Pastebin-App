@@ -19,7 +19,7 @@ const dbConfig = {
 };
 
 const baseUrl = process.env.NODE_ENV === "production"
-	? "postgres://rrgwbjez:n32TcmPb02jtper3Fpn4gaZUPCTcXO7t@tai.db.elephantsql.com/rrgwbjez"
+	? "DATABASE_URL"
 	: "localhost:4000"
 
 const app = express();
