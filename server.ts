@@ -18,6 +18,10 @@ const dbConfig = {
   ssl: sslSetting,
 };
 
+const baseUrl = process.env.NODE_ENV === "production"
+	? "postgres://rrgwbjez:n32TcmPb02jtper3Fpn4gaZUPCTcXO7t@tai.db.elephantsql.com/rrgwbjez"
+	: "localhost:4000"
+
 const app = express();
 
 app.use(express.json()); //add body parser to each following route handler
