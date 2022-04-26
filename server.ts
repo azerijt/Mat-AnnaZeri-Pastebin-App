@@ -19,7 +19,7 @@ const dbConfig = {
 };
 
 const baseUrl = process.env.NODE_ENV === "production"
-	? "DATABASE_URL"
+	? process.env.DATABASE_URL
 	: "localhost:4000"
 
 const app = express();
