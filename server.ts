@@ -30,10 +30,20 @@ app.use(cors()) //add CORS support to each following route handler
 const client = new Client(dbConfig);
 client.connect();
 
+let getSummaryText = "select title,split_part(paste_text, E'\n', 1) as summary from categories order by table_id desc limit 10"
+let insertText = "input into categories(title, paste_text) values ($1, $2)"
+
 app.get("/", async (req, res) => {
-  const dbres = await client.query('select * from categories');
+  const dbres = await client.query(getSummaryText);
   res.json(dbres.rows);
 });
+
+app.post("/pastes", async (req, res) => {
+  const dbadd = await client.query(insertText);
+  res.json(dbadd.rows);
+});
+
+
 
 
 //Start the server on the given port
