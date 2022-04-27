@@ -49,7 +49,7 @@ app.post("/pastes", async(req, res) => {
       const {title, paste_text} = req.body
       const addPaste = await client.query(
         'INSERT INTO categories (title, paste_text) VALUES ($1, $2) returning *' , [title, paste_text]);
-      res.json(addPaste)
+      res.json(addPaste.rows)
     } catch (error) {
       console.error(error.stack);
     } 
