@@ -31,7 +31,7 @@ const client = new Client(dbConfig);
 client.connect();
 
 let getSummaryText = "select title,split_part(paste_text, E'\n', 1) as summary from categories order by table_id desc limit 10"
-let insertText = "input into categories(title, paste_text) values (req)"
+//let insertText = "input into categories(title, paste_text) values (req)"
 
 app.get("/", async (req, res) => {
   const dbres = await client.query(getSummaryText);
@@ -43,19 +43,15 @@ app.get("/", async (req, res) => {
 //   res.json(dbadd.rows);
 // });
 
-app.post('/pastes', async(req, res) => {
-  const title:string = req.body
-  // .title;
-  // const paste_text:string = req.body.paste_text;
-  // const insertPaste = async ( title: string, paste_text: string ) => {
+app.post("/pastes", async(req, res) => {
+
     try {
-      console.log(req.params)
-      await client.query(
-        'INSERT INTO categories ("title") VALUES ($1)' , [title]);
-        return true;
+      const {title, paste_text} = req.body
+      const addPaste = await client.query(
+        'INSERT INTO categories (title, paste_text) VALUES ($1, $2) returning *' , [title, paste_text]);
+      res.json(addPaste)
     } catch (error) {
       console.error(error.stack);
-      return false;
     } 
   });
 
