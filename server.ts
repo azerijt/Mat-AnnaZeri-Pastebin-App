@@ -18,10 +18,6 @@ const dbConfig = {
   ssl: sslSetting,
 };
 
-const baseUrl = process.env.NODE_ENV === "production"
-	? process.env.DATABASE_URL
-	: "localhost:4000"
-
 const app = express();
 
 app.use(express.json()); //add body parser to each following route handler
