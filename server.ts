@@ -26,7 +26,7 @@ app.use(cors()) //add CORS support to each following route handler
 const client = new Client(dbConfig);
 client.connect();
 
-let getSummaryText = "select title,split_part(paste_text, E'\n', 1) as summary from categories order by table_id desc limit 10"
+let getSummaryText = "select title, paste_text, split_part(paste_text, E'\n', 1) as summary from categories order by table_id desc limit 10"
 //
 
 app.get("/", async (req, res) => {
