@@ -46,6 +46,7 @@ app.post("/pastes", async(req, res) => {
       res.json(addPaste.rows)
     } catch (error) {
       console.error(error.stack);
+      res.sendStatus(503);
     } 
   });
 
