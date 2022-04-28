@@ -31,20 +31,14 @@ const client = new Client(dbConfig);
 client.connect();
 
 let getSummaryText = "select title,split_part(paste_text, E'\n', 1) as summary from categories order by table_id desc limit 10"
-//let insertText = "input into categories(title, paste_text) values (req)"
+//
 
 app.get("/", async (req, res) => {
   const dbres = await client.query(getSummaryText);
   res.json(dbres.rows);
 });
 
-// app.post("/pastes", async (req, res) => {
-//   const dbadd = await client.query(insertText);
-//   res.json(dbadd.rows);
-// });
-
 app.post("/pastes", async(req, res) => {
-
     try {
       const {title, paste_text} = req.body
       const addPaste = await client.query(
@@ -54,8 +48,6 @@ app.post("/pastes", async(req, res) => {
       console.error(error.stack);
     } 
   });
-
-
 
 //Start the server on the given port
 const port = process.env.PORT;
