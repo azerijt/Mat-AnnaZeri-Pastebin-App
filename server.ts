@@ -41,6 +41,9 @@ app.get("/", async (req, res) => {
 app.post("/pastes", async(req, res) => {
     try {
       const {title, paste_text} = req.body
+      console.log('req.body',req.body)
+      console.log('title', title)
+      console.log('paste_text', paste_text)
       const addPaste = await client.query(
         'INSERT INTO categories (title, paste_text) VALUES ($1, $2) returning *' , [title, paste_text]);
       res.json(addPaste.rows)
